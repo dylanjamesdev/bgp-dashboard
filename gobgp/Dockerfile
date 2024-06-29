@@ -4,11 +4,15 @@ RUN apt-get update && \
     apt-get install -y \
         python3 \
         python3-pip \
-        gobgp \
         wget && \
     rm -rf /var/lib/apt/lists/*
 COPY ./requirements.txt /tmp/requirements.txt
 RUN pip3 install -r /tmp/requirements.txt
+RUN wget https://github.com/osrg/gobgp/releases/download/v3.27.0/gobgp_3.27.0_linux_amd64.tar.gz && \
+    tar -xzvf gobgp_3.27.0_linux_amd64.tar.gz && \
+    mv gobgp /usr/local/bin/gobgp && \
+    mv gobgpd /usr/local/bin/gobgpd && \
+    rm gobgp_3.27.0_linux_amd64.tar.gz
 COPY ./gobgpd.conf /root/gobgp/gobgpd.conf
 COPY ./entrypoint.sh /root/gobgp/entrypoint.sh
 COPY ./startup.sh /root/gobgp/startup.sh
