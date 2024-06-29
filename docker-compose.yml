@@ -1,8 +1,7 @@
 services:
   gobgp:
     build: ./gobgp
-    ports:
-      - 179:179
+    network_mode: "host"
     volumes:
       - .:/var/tmp
     restart: always

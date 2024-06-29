@@ -20,7 +20,7 @@ import logging
 MAX_PREFIX_HISTORY = 100  # None = unlimited (BGP flapping will likely kill DB if unlimited)
 
 
-def db_connect(host='mongodb') -> Database:
+def db_connect(host='mongodb://data.myinfra.lol:27017') -> Database:
     """Return a connection to the Mongo Database."""
     client = MongoClient(host=host)
     return client['bgp']
